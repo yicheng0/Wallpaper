@@ -17,31 +17,31 @@ export default function PricingPage() {
     <div className="bg-black text-white min-h-screen">
       {/* Main Content */}
       <div className="relative overflow-hidden">
-        {/* Grid Background */}
-        <div className="absolute inset-0 bg-grid-white/[0.05]" />
-        {/* Radial Gradient */}
-        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
+        {/* New Background */}
+        <div className="absolute inset-0 -z-10 h-full w-full bg-black" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
-              Choose Your Creative Plan
+          <div className="text-center mb-10">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tighter">
+              <span className="bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+                Choose Your Creative Plan
+              </span>
             </h1>
-            <p className="text-2xl text-neutral-300 max-w-3xl mx-auto">
+            <p className="text-lg text-neutral-300 max-w-2xl mx-auto">
               From free experience to professional creation, there's a plan for everyone
             </p>
-            <p className="mt-4 text-lg text-neutral-400">
+            <p className="mt-3 text-base text-neutral-400">
               专业级AI创作工具
             </p>
-            <p className="mt-4 text-sm text-neutral-500">
+            <p className="mt-2 text-sm text-neutral-500">
               Already joined by 100,000+ creators
             </p>
           </div>
 
           {/* Current Status */}
           {user && (
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <Badge
                 className={`text-lg px-6 py-3 border border-white/10 ${
                   user.isPremium
@@ -72,7 +72,7 @@ export default function PricingPage() {
       </div>
 
       {/* Testimonials */}
-      <div className="py-16 border-t border-white/10">
+      <div className="py-12 border-t border-white/10">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-white mb-10">What Our Users Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -89,7 +89,7 @@ export default function PricingPage() {
       </div>
 
       {/* FAQ */}
-      <div className="py-16 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <div className="py-12 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/10">
         <h2 className="text-3xl font-bold text-center text-white mb-10">Frequently Asked Questions</h2>
         <div className="space-y-4">
           <div className="bg-neutral-900/70 border border-white/10 rounded-lg p-6">

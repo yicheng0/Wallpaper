@@ -38,7 +38,7 @@ export default function MasonryGrid({ images }: MasonryGridProps) {
   }
 
   return (
-    <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+    <div className="columns-2 sm:columns-3 lg:columns-4 xl:columns-5 gap-4 space-y-4">
       {images.map((image) => (
         <div
           key={image.id}

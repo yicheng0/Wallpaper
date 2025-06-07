@@ -38,9 +38,6 @@ export default function Navbar() {
             {user ? (
               <div className="flex items-center space-x-4">
                 {user.isPremium && <Crown className="h-5 w-5 text-yellow-400" />}
-                <span className="text-sm text-neutral-400">
-                  {user.isPremium ? "Premium" : `Creations Left: ${3 - user.dailyGenerations}`}
-                </span>
                 <Button variant="outline" size="sm" className="bg-transparent border-neutral-700 hover:bg-neutral-800 hover:text-white">
                   {user.email}
                 </Button>
@@ -79,9 +76,6 @@ export default function Navbar() {
                     {user.isPremium && <Crown className="h-4 w-4 text-yellow-400" />}
                     <span className="text-sm text-neutral-300">{user.email}</span>
                   </div>
-                  <span className="text-xs text-neutral-500">
-                    {user.isPremium ? "Premium User" : `Creations Left: ${3 - user.dailyGenerations}`}
-                  </span>
                 </div>
               ) : (
                 <Link href="/auth">

@@ -7,6 +7,12 @@ import { Input } from "@/components/ui/input"
 import MasonryGrid from "@/components/masonry-grid"
 import { type GeneratedImage, getStoredImages } from "@/lib/storage"
 import { ArrowRight, Zap, Crown, Users } from "lucide-react"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
 
 // Re-implement FeatureCard directly in the file
 interface FeatureCardProps {
@@ -28,6 +34,52 @@ function FeatureCard({ icon, title, description, bgColor }: FeatureCardProps) {
   );
 }
 
+const faqItems = [
+  {
+    question: "What is this AI Art Generator?",
+    answer: "This is a tool that uses artificial intelligence to create unique images from text descriptions. You can describe anything you can imagine, and the AI will generate a visual representation of it.",
+  },
+  {
+    question: "How does it work?",
+    answer: "Our generator uses advanced deep learning models (Generative Adversarial Networks or GANs, and Diffusion Models) that have been trained on vast datasets of images. When you enter a prompt, the AI interprets your words and synthesizes a new image based on its training.",
+  },
+  {
+    question: "Is it free to use?",
+    answer: "We offer a free tier that allows you to generate a certain number of images per day. For unlimited generations, higher resolution images, and access to premium features, you can upgrade to our Pro plan.",
+  },
+  {
+    question: "Can I use the generated images for commercial purposes?",
+    answer: "Yes, images created with our Pro plan can be used for commercial purposes. Images created under the free plan are for personal use only. Please refer to our terms of service for more details.",
+  },
+];
+
+function FaqSection() {
+  return (
+    <section className="py-20">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold">Frequently Asked Questions</h2>
+          <p className="text-neutral-400 mt-4">
+            Find answers to common questions about our AI Art Generator.
+          </p>
+        </div>
+        <Accordion type="single" collapsible className="w-full">
+          {faqItems.map((item, index) => (
+            <AccordionItem value={`item-${index + 1}`} key={index} className="border-neutral-800">
+              <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline">
+                {item.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-base text-neutral-400">
+                {item.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   const [prompt, setPrompt] = useState("")
   const [recentImages, setRecentImages] = useState<GeneratedImage[]>([])
@@ -42,25 +94,25 @@ export default function HomePage() {
     {
       id: "example-1",
       prompt: "A cute orange cat sitting under cherry blossoms, anime style",
-      imageUrl: "/placeholder.svg?height=400&width=300",
+      imageUrl: "/placeholder.svg?height=300&width=225",
       createdAt: new Date().toISOString(),
     },
     {
       id: "example-2",
       prompt: "Futuristic city at night with neon lights, cyberpunk style",
-      imageUrl: "/placeholder.svg?height=500&width=300",
+      imageUrl: "/placeholder.svg?height=375&width=225",
       createdAt: new Date().toISOString(),
     },
     {
       id: "example-3",
       prompt: "Magical forest cottage surrounded by rainbows, fairy tale style",
-      imageUrl: "/placeholder.svg?height=350&width=300",
+      imageUrl: "/placeholder.svg?height=263&width=225",
       createdAt: new Date().toISOString(),
     },
     {
       id: "example-4",
       prompt: "Colorful nebula in space, sci-fi style",
-      imageUrl: "/placeholder.svg?height=450&width=300",
+      imageUrl: "/placeholder.svg?height=338&width=225",
       createdAt: new Date().toISOString(),
     },
   ]
@@ -70,7 +122,7 @@ export default function HomePage() {
   return (
     <div className="bg-black text-white">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center bg-grid-white/[0.05] relative">
+      <section className="min-h-screen flex items-center justify-center relative bg-animated-gradient">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
@@ -157,6 +209,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FaqSection />
     </div>
   )
 }

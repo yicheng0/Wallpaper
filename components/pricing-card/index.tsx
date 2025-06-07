@@ -32,19 +32,9 @@ export function PricingCard({
   return (
     <Card
       className={cn(
-        'relative flex flex-col bg-neutral-900/70 border border-white/10 rounded-2xl overflow-hidden',
-        {
-          'border-purple-500 shadow-2xl shadow-purple-500/40': recommended,
-        }
+        'relative flex flex-col bg-neutral-900/70 border border-white/10 rounded-2xl overflow-hidden'
       )}
     >
-      {recommended && (
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="px-4 py-1.5 text-xs font-semibold tracking-wider text-white uppercase bg-gradient-to-r from-purple-500 to-pink-500 rounded-full">
-            Recommended
-          </div>
-        </div>
-      )}
       <CardHeader className="pt-10">
         <CardTitle className="text-3xl font-bold text-white">{title}</CardTitle>
         <CardDescription className="text-neutral-400">{description}</CardDescription>
@@ -75,8 +65,8 @@ export function PricingCard({
         <Button
           size="lg"
           className={cn('w-full text-lg font-bold rounded-lg', {
-            'bg-white text-black hover:bg-neutral-200': recommended,
-            'bg-neutral-800/80 hover:bg-neutral-700/80 text-white': !recommended,
+            'bg-white text-black hover:bg-neutral-200': !isFree,
+            'bg-neutral-800/80 hover:bg-neutral-700/80 text-white': isFree,
           })}
         >
           {isFree ? 'Start for Free' : 'Upgrade to Premium'}

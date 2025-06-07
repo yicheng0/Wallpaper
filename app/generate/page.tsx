@@ -22,6 +22,34 @@ import { generateImage } from "@/lib/openai"
 import { Sparkles, Wand2, Crown } from "lucide-react"
 import Link from "next/link"
 
+const allPromptSuggestions = [
+    "A cute orange cat sitting under cherry blossoms, anime style",
+    "Futuristic city at night with neon lights, cyberpunk style",
+    "Magical forest cottage surrounded by rainbows, fairy tale style",
+    "Colorful nebula in space, sci-fi style",
+    "Ancient Chinese landscape painting, ink wash style",
+    "Modern minimalist interior design, Scandinavian style",
+    "A majestic lion with a crown of stars, fantasy art",
+    "Steampunk-inspired mechanical owl with glowing eyes",
+    "Underwater city with bioluminescent creatures, detailed illustration",
+    "A lone astronaut on a desolate red planet, cinematic lighting",
+    "Surreal portrait of a woman with butterfly wings for hair",
+    "Impressionist painting of a rainy day in Paris",
+    "A delicious-looking pizza with unusual toppings, hyperrealistic",
+    "Vintage travel poster for a trip to Mars",
+    "A robot tending to a garden of crystal flowers, concept art",
+    "Portrait of a noble knight in ornate armor, digital painting",
+    "Haunted forest with twisted trees and a glowing mist",
+    "A city in the clouds, utopian architecture",
+    "Low-poly illustration of a mountain range at sunrise",
+    "An elaborate teacup with a galaxy swirling inside",
+];
+
+function getRandomSuggestions(count: number): string[] {
+  const shuffled = allPromptSuggestions.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
 function GeneratePageContent() {
   const searchParams = useSearchParams()
   const [prompt, setPrompt] = useState("")
@@ -29,11 +57,13 @@ function GeneratePageContent() {
   const [user, setUser] = useState<User | null>(null)
   const [myImages, setMyImages] = useState<GeneratedImage[]>([])
   const [showPaywall, setShowPaywall] = useState(false)
+  const [promptSuggestions, setPromptSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
     const currentUser = getStoredUser()
     setUser(currentUser)
     setMyImages(getStoredImages())
+    setPromptSuggestions(getRandomSuggestions(6));
 
     const urlPrompt = searchParams.get("prompt")
     if (urlPrompt) {
@@ -79,15 +109,6 @@ function GeneratePageContent() {
     }
   }
 
-  const promptSuggestions = [
-    "A cute orange cat sitting under cherry blossoms, anime style",
-    "Futuristic city at night with neon lights, cyberpunk style",
-    "Magical forest cottage surrounded by rainbows, fairy tale style",
-    "Colorful nebula in space, sci-fi style",
-    "Ancient Chinese landscape painting, ink wash style",
-    "Modern minimalist interior design, Scandinavian style",
-  ]
-
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,14 +134,6 @@ function GeneratePageContent() {
                   ) : (
                     <Badge variant="secondary" className="bg-neutral-800 text-neutral-300 border-none">Free User</Badge>
                   )}
-                  <span className="text-sm text-neutral-400">
-                    {user.isPremium
-                      ? "Unlimited generations"
-                      : `Creations Left: ${Math.max(
-                          0,
-                          3 - user.dailyGenerations
-                        )}`}
-                  </span>
                 </div>
                 {!user.isPremium && (
                   <Link href="/pricing">
